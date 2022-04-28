@@ -11,6 +11,11 @@
   - [Questions](#questions)
   - [Summary](#summary)
 
+## Screenshots
+![image](https://user-images.githubusercontent.com/98775943/165660824-833bf26a-e2bb-4d71-824f-6002bb70ca16.png)
+![image](https://user-images.githubusercontent.com/98775943/165660905-8cefc4fd-9b1a-4e95-b64e-6aafcae9dec7.png)
+![image](https://user-images.githubusercontent.com/98775943/165660964-f8adf4e2-d427-4ebb-998b-337e475620a3.png)
+
 ## Description
 I was tasked with completing the backed functions for a browser Notetaker that includes a homepage with buttons. There is a get started button that will take you to the page where you can enter a note title and corresponding text. The backend functions included linking the public index.html and notes.html within a server.js and getting/posting/deleting notes from a json file by utlizing Express.js, path and a random number generator (UUID).
 
