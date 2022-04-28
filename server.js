@@ -64,6 +64,10 @@ app.delete('/api/notes/:id',(req,res)=>{
     res.json(`Note has been deleted`);
 })
 
+app.get('*',(req,res)=>
+    res.sendFile(path.join(__dirname,'./public/index.html'))
+);
+
 //ADD listener for app 
 app.listen(PORT,()=>
 console.log(`App listening at http://localhost:${PORT}`));
