@@ -3,7 +3,6 @@ const fs= require('fs');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const { runInNewContext } = require('vm');
-const { readAndAppend, readFromFile } = require('./helpers/fsUtils');
 const util = require('util');
 
 const app = express();
@@ -20,30 +19,31 @@ app.get('/',(req,res)=>
 res.sendFile(path.join(__dirname,'./public/index.html'))
 );
 
-// TODO: GET notes (notes.html)
+//  GET notes (notes.html)
 app.get('/notes',(req,res)=>
 res.sendFile(path.join(__dirname,'./public/notes.html'))
 );
 
 
 
-// TODO: GET api/notes (should read db.json)
+// GET api/notes (should read db.json)
 app.get('/api/notes',(req,res)=>{
 const notes = JSON.parse(fs.readFileSync(`./db/db.json`))
 res.json(notes)
 });
 
-// TODO: POST api/notes (write file?)
+//  POST api/notes (write file?)
 app.post('/api/notes',(req,res)=>{
     const newNotes = JSON.parse(fs.readFileSync(`./db/db.json`))
+// If the new note has a title and a text then it will be created and given a unique ID.
     const {title, text} = req.body;
-
     if(req.body) {
         const newNote ={
             title,
             text,
             id: uuidv4()
         };
+    //pushes the newly created note into the existing notes and responds that it has been created. 
         newNotes.push(newNote);
         const stringNotes = JSON.stringify(newNotes,null,4)
         fs.writeFileSync(`./db/db.json`,stringNotes)
@@ -56,7 +56,7 @@ app.post('/api/notes',(req,res)=>{
     
 })
 
-// TODO: BONUS DELETE Method /api/notes/:id (will need to READ all notes from db.json THEN remove the note with the given id, THEN rewrite file )
+// BONUS DELETE Method /api/notes/:id (will need to READ all notes from db.json THEN remove the note with the given id, THEN rewrite file )
 
 app.delete('/api/notes/:id',(req,res)=>{
     const api = JSON.parse(fs.readFileSync(`./db/db.json`)) 
@@ -64,7 +64,7 @@ app.delete('/api/notes/:id',(req,res)=>{
     res.json(`Note has been deleted`);
 })
 
-// TODO: ADD listener for app 
+//ADD listener for app 
 app.listen(PORT,()=>
 console.log(`App listening at http://localhost:${PORT}`));
 
